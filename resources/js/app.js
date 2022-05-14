@@ -7,6 +7,9 @@
  require('./bootstrap');
  import Vue from 'vue'; // if this is not work add this =>  window.Vue = require('vue');
 
+ import 'bootstrap/dist/css/bootstrap.css';
+ import 'bootstrap-vue/dist/bootstrap-vue.css';
+
  import axios from 'axios';
  import VueAxios from 'vue-axios';
  import Auth from './Auth.js';
