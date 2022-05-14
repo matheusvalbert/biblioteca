@@ -1,9 +1,17 @@
 <template>
-    <div>
-        <h1>Dashboard Dashboard</h1>
-        <h4>The logged in user details Here</h4><br>
-        <p> {{user.name}}</p>
-        <p> {{user.email}}</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h3>Dashboard</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-0">You are logged in as <b>{{user.email}}</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
