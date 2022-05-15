@@ -20,7 +20,7 @@ const routes = [
         name: "Register"
     },
     {
-        path: '/Home',
+        path: '/home',
         component: Home,
         name: "Home",
         meta: {

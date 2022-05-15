@@ -1,73 +1,78 @@
-version: "3.7"
+version: "3.8"
 
 services:
-    # image project
-    app:
-        container_name: especializati-laravel-9
-        build:
-            context: .
-            dockerfile: Dockerfile
-        image: especializati/laravel9-app
-        restart: unless-stopped
-        working_dir: /var/www/
-        volumes:
-            - ./:/var/www
-        depends_on:
-            - redis
-        networks:
-            - laravel-9
+  app:
+    build:
+      args:
+        user: laravel
+        uid: 1000
+      context: ./
+      dockerfile: .docker/Dockerfile
+    image: laravel
+    container_name: laravel-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./src:/var/www
+    networks:
+      - mynetwork
 
-    # nginx
-    nginx:
-        container_name: especializati-nginx
-        image: nginx:alpine
-        restart: unless-stopped
-        ports:
-            - "8989:80"
-        volumes:
-            - ./:/var/www
-            - ./docker/nginx/:/etc/nginx/conf.d/
-        networks:
-            - laravel-9
+  # nginx
+  nginx:
+    container_name: laravel-nginx
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www
+      - ./.docker/nginx:/etc/nginx/conf.d
+    networks:
+      - mynetwork
 
-    # db mysql
-    mysql:
-        container_name: especializati-mysql
-        image: mysql:5.7.22
-        restart: unless-stopped
-        environment:
-            MYSQL_DATABASE: mysql
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_PASSWORD: root
-            MYSQL_USER: laravel
-        volumes:
-            - ./.docker/mysql/dbdata:/var/lib/mysql
-        ports:
-            - "3388:3306"
-        networks:
-            - laravel-9
+  # mysql
+  mysql:
+    container_name: laravel-mysql
+    image: mysql:5.7.38
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - mynetwork
 
-    # queue
-    queue:
-        container_name: especializati-queue
-        image: especializati/laravel9-app
-        restart: unless-stopped
-        command: "php artisan queue:work"
-        volumes:
-            - ./:/var/www
-        depends_on:
-            - redis
-            - app
-        networks:
-            - laravel-9
+  # redis
+  redis:
+    container_name: laravel-redis
+    image: redis:latest
+    networks:
+      - mynetwork
 
-    # redis
-    redis:
-        container_name: especializati-redis
-        image: redis:latest
-        networks:
-            - laravel-9
+  # phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: laravel-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 8081:80
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    links:
+      - mysql
+    networks:
+      - mynetwork
 
 networks:
-    laravel-9:
-        driver: bridge
+  mynetwork:
+    driver: bridge
