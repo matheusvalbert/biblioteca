@@ -3,7 +3,7 @@
         <div class="float-right mr-2 pt-2 position-relative">
             <div v-if="navegacao">
                 <div v-if="logado">
-                    <router-link :to="{ name: 'PaginaInicial' }" class="mr-2 text-secondary"><u>Sistema</u></router-link>
+                    <router-link :to="{ name: 'Home' }" class="mr-2 text-secondary"><u>Sistema</u></router-link>
                 </div>
                 <div v-else>
                     <router-link :to="{ name: 'Login' }" class="mr-2 text-secondary"><u>Entrar</u></router-link>

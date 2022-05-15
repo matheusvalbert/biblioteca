@@ -48,7 +48,7 @@
         created () {
             this.logado = Auth.check();
             if(this.logado)
-                this.pushPaginaInicial();
+                this.pushHome();
         },
         methods: {
             login() {
@@ -56,7 +56,7 @@
                 this.axios.post('/api/login', this.auth)
                     .then(({data}) => {
                         Auth.login(data.access_token, data.user);
-                        this.pushPaginaInicial();
+                        this.pushHome();
                     })
                     .catch((error) => {
                         alert(error);
@@ -65,8 +65,8 @@
                         this.processing = false
                     });
             },
-            pushPaginaInicial() {
-                this.$router.push({ name: 'PaginaInicial' });
+            pushHome() {
+                this.$router.push({ name: 'Home' });
             }
         }
     }

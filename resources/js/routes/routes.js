@@ -1,8 +1,7 @@
-import Login from '../components/login.vue';
-import Register from '../components/register.vue';
-import Dashboard from '../components/dashboard.vue';
-
-import MainPage from '../pages/MainPage.vue';
+const MainPage = () => import('../pages/MainPage.vue');
+const Login = () => import('../components/LoginComponent.vue');
+const Register = () => import('../components/RegisterComponent.vue');
+const Home = () => import('../components/HomeComponent.vue');
 
 const routes = [
     {
@@ -21,9 +20,9 @@ const routes = [
         name: "Register"
     },
     {
-        path: '/dashboard',
-        component: Dashboard,
-        name: "PaginaInicial",
+        path: '/Home',
+        component: Home,
+        name: "Home",
         meta: {
             requiresAuth: true,
         }
