@@ -21,10 +21,12 @@ class Auth {
     check () {
         return !! this.token;
     }
+
     logout () {
         // window.localStorage.clear();
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('user');
+        this.token = null;
         this.user = null;
     }
 }
