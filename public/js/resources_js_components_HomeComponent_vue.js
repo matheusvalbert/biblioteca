@@ -32,6 +32,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -50,6 +51,14 @@ __webpack_require__.r(__webpack_exports__);
     updateHeaderTrue: function updateHeaderTrue() {
       this.$emit('updateLogadoFalse');
       this.$emit('updateHeaderTrue');
+    },
+    data: function data() {
+      this.axios.get('/api/testando').then(function (_ref) {
+        var data = _ref.data;
+        console.log(data);
+      })["catch"](function (error) {
+        alert(error);
+      });
     }
   }
 });
@@ -300,6 +309,15 @@ var render = function () {
                   _vm._v("You are logged in as "),
                   _c("b", [_vm._v(_vm._s(_vm.user.email))]),
                 ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary mt-2",
+                    on: { click: _vm.data },
+                  },
+                  [_vm._v("View user data")]
+                ),
               ]),
             ]),
           ]),

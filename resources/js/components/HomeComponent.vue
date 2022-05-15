@@ -10,6 +10,7 @@
                     </div>
                     <div class="card-body">
                         <p class="mb-0">You are logged in as <b>{{user.email}}</b></p>
+                        <button class="btn btn-primary mt-2" @click="data">View user data</button>
                     </div>
                 </div>
             </div>
@@ -38,7 +39,16 @@ import LoggedHeader from '../general/LoggedHeader.vue';
             updateHeaderTrue() {
                 this.$emit('updateLogadoFalse');
                 this.$emit('updateHeaderTrue');
-            }
+            },
+            data() {
+                this.axios.get('/api/testando')
+                    .then(({data}) => {
+                        console.log(data);
+                    })
+                    .catch((error) => {
+                        alert(error);
+                    })
+            },
         }
     }
 </script>
