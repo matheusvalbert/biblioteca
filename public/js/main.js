@@ -2180,30 +2180,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      loggedUser: this.auth.user
+      logado: false
     };
   },
-  mounted: function mounted() {
-    console.log(this.auth.user);
+  created: function created() {
+    this.logado = _resources_Auth_js__WEBPACK_IMPORTED_MODULE_0__["default"].check();
   },
-  methods: {
-    logout: function logout() {
-      var _this = this;
-
-      this.axios.post('/api/logout').then(function (_ref) {
-        var data = _ref.data;
-        _resources_Auth_js__WEBPACK_IMPORTED_MODULE_0__["default"].logout(); //reset local storage
-
-        _this.$router.push('/login');
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -38846,30 +38838,46 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "float-right mr-2 pt-2 position-relative" },
-      [
-        _c(
-          "router-link",
-          {
-            staticClass: "mr-2 text-secondary",
-            attrs: { to: { name: "Login" } },
-          },
-          [_c("u", [_vm._v("Entrar")])]
-        ),
-        _vm._v(" "),
-        _c(
-          "router-link",
-          {
-            staticClass: "text-secondary",
-            attrs: { to: { name: "Register" } },
-          },
-          [_c("u", [_vm._v("Registrar")])]
-        ),
-      ],
-      1
-    ),
+    _c("div", { staticClass: "float-right mr-2 pt-2 position-relative" }, [
+      _vm.logado
+        ? _c(
+            "div",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "mr-2 text-secondary",
+                  attrs: { to: { name: "Dashboard" } },
+                },
+                [_c("u", [_vm._v("Sistema")])]
+              ),
+            ],
+            1
+          )
+        : _c(
+            "div",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "mr-2 text-secondary",
+                  attrs: { to: { name: "Login" } },
+                },
+                [_c("u", [_vm._v("Entrar")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "text-secondary",
+                  attrs: { to: { name: "Register" } },
+                },
+                [_c("u", [_vm._v("Registrar")])]
+              ),
+            ],
+            1
+          ),
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "bg-dark vh-100" }, [_c("router-view")], 1),
   ])
