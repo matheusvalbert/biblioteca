@@ -2338,6 +2338,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _resources_Auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../resources/Auth */ "./resources/js/resources/Auth.js");
 //
 //
 //
@@ -2379,6 +2380,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2388,6 +2390,10 @@ __webpack_require__.r(__webpack_exports__);
         password: '',
         password_confirmation: ''
       },
+      auth: {
+        email: '',
+        password: ''
+      },
       processing: false
     };
   },
@@ -2396,15 +2402,29 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.processing = true;
-      console.log(this.user);
       this.axios.post('/api/register', this.user).then(function (_ref) {
         var data = _ref.data;
-
-        _this.$router.push('/login');
+        _this.auth.email = _this.user.email;
+        _this.auth.password = _this.user.password;
+        if (_this.auth.email != '' && _this.auth.password != '') _this.login();
       })["catch"](function (error) {
-        console.log(error);
+        alert(error);
+      });
+    },
+    login: function login() {
+      var _this2 = this;
+
+      this.axios.post('/api/login', this.auth).then(function (_ref2) {
+        var data = _ref2.data;
+        _resources_Auth__WEBPACK_IMPORTED_MODULE_0__["default"].login(data.access_token, data.user);
+
+        _this2.$router.push({
+          name: 'Pagina Inicial'
+        });
+      })["catch"](function (error) {
+        alert(error);
       })["finally"](function () {
-        _this.processing = false;
+        _this2.processing = false;
       });
     }
   }
@@ -39068,7 +39088,7 @@ var render = function () {
                       _vm._v(
                         "\n                                " +
                           _vm._s(
-                            _vm.processing ? "Por favor, Aguarde..." : "Entrar"
+                            _vm.processing ? "Por favor, aguarde..." : "Entrar"
                           ) +
                           "\n                            "
                       ),
@@ -39126,7 +39146,7 @@ var render = function () {
       _c("div", { staticClass: "col-12 col-md-6 offset-md-3" }, [
         _c("div", { staticClass: "card shadow sm" }, [
           _c("div", { staticClass: "card-body" }, [
-            _c("h1", { staticClass: "text-center" }, [_vm._v("Register")]),
+            _c("h1", { staticClass: "text-center" }, [_vm._v("Registrar")]),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
@@ -39142,7 +39162,7 @@ var render = function () {
                   _c(
                     "label",
                     { staticClass: "font-weight-bold", attrs: { for: "name" } },
-                    [_vm._v("Name")]
+                    [_vm._v("Nome:")]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -39159,7 +39179,7 @@ var render = function () {
                       type: "text",
                       name: "name",
                       id: "name",
-                      placeholder: "Enter name",
+                      placeholder: "digite o nome",
                     },
                     domProps: { value: _vm.user.name },
                     on: {
@@ -39180,7 +39200,7 @@ var render = function () {
                       staticClass: "font-weight-bold",
                       attrs: { for: "email" },
                     },
-                    [_vm._v("Email")]
+                    [_vm._v("Email:")]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -39197,7 +39217,7 @@ var render = function () {
                       type: "text",
                       name: "email",
                       id: "email",
-                      placeholder: "Enter Email",
+                      placeholder: "digite o email",
                     },
                     domProps: { value: _vm.user.email },
                     on: {
@@ -39218,7 +39238,7 @@ var render = function () {
                       staticClass: "font-weight-bold",
                       attrs: { for: "password" },
                     },
-                    [_vm._v("Password")]
+                    [_vm._v("Senha:")]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -39235,7 +39255,7 @@ var render = function () {
                       type: "password",
                       name: "password",
                       id: "password",
-                      placeholder: "Enter Password",
+                      placeholder: "digite a senha",
                     },
                     domProps: { value: _vm.user.password },
                     on: {
@@ -39256,7 +39276,7 @@ var render = function () {
                       staticClass: "font-weight-bold",
                       attrs: { for: "password_confirmation" },
                     },
-                    [_vm._v("Confirm Password")]
+                    [_vm._v("Confirmação da senha:")]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -39270,10 +39290,10 @@ var render = function () {
                     ],
                     staticClass: "form-control",
                     attrs: {
-                      type: "password_confirmation",
+                      type: "password",
                       name: "password_confirmation",
                       id: "password_confirmation",
-                      placeholder: "Enter Password",
+                      placeholder: "digite a senha novamente",
                     },
                     domProps: { value: _vm.user.password_confirmation },
                     on: {
@@ -39301,7 +39321,11 @@ var render = function () {
                     [
                       _vm._v(
                         "\n                                " +
-                          _vm._s(_vm.processing ? "Please wait" : "Register") +
+                          _vm._s(
+                            _vm.processing
+                              ? "Por favor, aguarde..."
+                              : "Registrar"
+                          ) +
                           "\n                            "
                       ),
                     ]
@@ -39312,9 +39336,9 @@ var render = function () {
                   _c(
                     "label",
                     [
-                      _vm._v("Already have an account? "),
+                      _vm._v("Já possui conta? "),
                       _c("router-link", { attrs: { to: { name: "Login" } } }, [
-                        _vm._v("Login Now!"),
+                        _vm._v("Entre agora!"),
                       ]),
                     ],
                     1

@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-12 mb-2">
                                 <button type="submit" :disabled="processing" @click="login" class="btn btn-primary btn-block">
-                                    {{ processing ? "Por favor, Aguarde..." : "Entrar" }}
+                                    {{ processing ? "Por favor, aguarde..." : "Entrar" }}
                                 </button>
                             </div>
                             <div class="col-12 text-center">
