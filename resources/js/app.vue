@@ -32,7 +32,7 @@
 </template>
 
 <script>
-    import Auth from './Auth.js';
+    import Auth from './resources/Auth.js';
     export default {
         data() {
             return {
