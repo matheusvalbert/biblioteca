@@ -2394,8 +2394,13 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         password: ''
       },
-      processing: false
+      processing: false,
+      logado: false
     };
+  },
+  created: function created() {
+    this.logado = _resources_Auth__WEBPACK_IMPORTED_MODULE_0__["default"].check();
+    if (this.logado) this.pushingMainPage();
   },
   methods: {
     register: function register() {
@@ -2418,13 +2423,16 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref2.data;
         _resources_Auth__WEBPACK_IMPORTED_MODULE_0__["default"].login(data.access_token, data.user);
 
-        _this2.$router.push({
-          name: 'Pagina Inicial'
-        });
+        _this2.pushingMainPage();
       })["catch"](function (error) {
         alert(error);
       })["finally"](function () {
         _this2.processing = false;
+      });
+    },
+    pushingMainPage: function pushingMainPage() {
+      this.$router.push({
+        name: 'Pagina Inicial'
       });
     }
   }

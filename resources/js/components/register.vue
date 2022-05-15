@@ -54,10 +54,15 @@ import Auth from '../resources/Auth';
                     email: '',
                     password: ''
                 },
-                processing:false
+                processing: false,
+                logado: false,
             };
         },
-
+        created () {
+            this.logado = Auth.check();
+            if(this.logado)
+                this.pushingMainPage();
+        },
         methods: {
             register () {
                 this.processing = true;
@@ -76,7 +81,7 @@ import Auth from '../resources/Auth';
                 this.axios.post('/api/login', this.auth)
                     .then(({data}) => {
                         Auth.login(data.access_token, data.user);
-                        this.$router.push({ name: 'Pagina Inicial' });
+                        this.pushingMainPage();
                     })
                     .catch((error) => {
                         alert(error);
@@ -84,6 +89,9 @@ import Auth from '../resources/Auth';
                     .finally(() => {
                         this.processing = false;
                     });
+            },
+            pushingMainPage() {
+                this.$router.push({ name: 'Pagina Inicial' });
             }
         }
     }
