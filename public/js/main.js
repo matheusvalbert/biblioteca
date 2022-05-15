@@ -38877,7 +38877,7 @@ var render = function () {
                 "router-link",
                 {
                   staticClass: "mr-2 text-secondary",
-                  attrs: { to: { name: "Dashboard" } },
+                  attrs: { to: { name: "Pagina Inicial" } },
                 },
                 [_c("u", [_vm._v("Sistema")])]
               ),
