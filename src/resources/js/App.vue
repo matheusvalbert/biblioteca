@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="float-right mr-2 pt-2 position-relative">
-            <div v-if="navegacao">
+        <div class="float-right pt-2 position-relative">
+            <div v-if="navegacao" class="mr-2">
                 <div v-if="logado">
                     <router-link :to="{ name: 'Home' }" class="mr-2 text-secondary"><u>Sistema</u></router-link>
                 </div>
