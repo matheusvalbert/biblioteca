@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+// all routes web routes will redirect to vue
+Route::get('{any}', function () {
     return view('layouts.app');
-});
+})->where('any', '.*');
