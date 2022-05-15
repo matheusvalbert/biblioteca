@@ -4,24 +4,24 @@
             <div class="col-12 col-md-6 offset-md-3">
                 <div class="card shadow sm">
                     <div class="card-body">
-                        <h1 class="text-center">Login</h1>
+                        <h1 class="text-center">Entrar</h1>
                         <hr/>
                         <form action="javascript:void(0)" class="row" method="post">
                             <div class="form-group col-12">
-                                <label for="email" class="font-weight-bold">Email</label>
-                                <input type="text" v-model="auth.email" name="email" id="email" class="form-control">
+                                <label for="email" class="font-weight-bold">Email:</label>
+                                <input type="text" v-model="auth.email" name="email" id="email" class="form-control" placeholder="Digite o email">
                             </div>
                             <div class="form-group col-12">
-                                <label for="password" class="font-weight-bold">Password</label>
-                                <input type="password" v-model="auth.password" name="password" id="password" class="form-control">
+                                <label for="password" class="font-weight-bold">Senha:</label>
+                                <input type="password" v-model="auth.password" name="password" id="password" class="form-control" placeholder="Digite a senha">
                             </div>
                             <div class="col-12 mb-2">
                                 <button type="submit" :disabled="processing" @click="login" class="btn btn-primary btn-block">
-                                    {{ processing ? "Please wait" : "Login" }}
+                                    {{ processing ? "Por favor, Aguarde..." : "Entrar" }}
                                 </button>
                             </div>
                             <div class="col-12 text-center">
-                                <label>Don't have an account? <router-link :to="{name:'register'}">Register Now!</router-link></label>
+                                <label>Não possui conta? <router-link :to="{ name:'Register' }">Registre-se agora!</router-link></label>
                             </div>
                         </form>
                     </div>
@@ -41,24 +41,32 @@
                     email: '',
                     password: '',
                 },
-                processing:false
+                processing: false,
+                logado: false
             };
         },
-
+        created () {
+            this.logado = Auth.check();
+            if(this.logado)
+                this.pushingMainPage();
+        },
         methods: {
             login() {
                 this.processing = true
                 this.axios.post('/api/login', this.auth)
                     .then(({data}) => {
-                        Auth.login(data.access_token,data.user); //set local storage
-                        this.$router.push('/dashboard');
+                        Auth.login(data.access_token, data.user);
+                        this.pushingMainPage();
                     })
                     .catch((error) => {
-                        console.log(error);
+                        alert(error);
                     })
-                    .finally(()=>{
+                    .finally(() => {
                         this.processing = false
-                    })
+                    });
+            },
+            pushingMainPage() {
+                this.$router.push({ name: 'Pagina Inicial' });
             }
         }
     }

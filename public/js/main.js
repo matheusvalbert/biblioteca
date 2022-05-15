@@ -2293,8 +2293,13 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         password: ''
       },
-      processing: false
+      processing: false,
+      logado: false
     };
+  },
+  created: function created() {
+    this.logado = _resources_Auth_js__WEBPACK_IMPORTED_MODULE_0__["default"].check();
+    if (this.logado) this.pushingMainPage();
   },
   methods: {
     login: function login() {
@@ -2303,13 +2308,18 @@ __webpack_require__.r(__webpack_exports__);
       this.processing = true;
       this.axios.post('/api/login', this.auth).then(function (_ref) {
         var data = _ref.data;
-        _resources_Auth_js__WEBPACK_IMPORTED_MODULE_0__["default"].login(data.access_token, data.user); //set local storage
+        _resources_Auth_js__WEBPACK_IMPORTED_MODULE_0__["default"].login(data.access_token, data.user);
 
-        _this.$router.push('/dashboard');
+        _this.pushingMainPage();
       })["catch"](function (error) {
-        console.log(error);
+        alert(error);
       })["finally"](function () {
         _this.processing = false;
+      });
+    },
+    pushingMainPage: function pushingMainPage() {
+      this.$router.push({
+        name: 'Pagina Inicial'
       });
     }
   }
@@ -2665,7 +2675,7 @@ var routes = [{
 }, {
   path: '/dashboard',
   component: _components_dashboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-  name: "Dashboard",
+  name: "Pagina Inicial",
   meta: {
     requiresAuth: true
   }
@@ -38959,7 +38969,7 @@ var render = function () {
       _c("div", { staticClass: "col-12 col-md-6 offset-md-3" }, [
         _c("div", { staticClass: "card shadow sm" }, [
           _c("div", { staticClass: "card-body" }, [
-            _c("h1", { staticClass: "text-center" }, [_vm._v("Login")]),
+            _c("h1", { staticClass: "text-center" }, [_vm._v("Entrar")]),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
@@ -38977,7 +38987,7 @@ var render = function () {
                       staticClass: "font-weight-bold",
                       attrs: { for: "email" },
                     },
-                    [_vm._v("Email")]
+                    [_vm._v("Email:")]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -38990,7 +39000,12 @@ var render = function () {
                       },
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", name: "email", id: "email" },
+                    attrs: {
+                      type: "text",
+                      name: "email",
+                      id: "email",
+                      placeholder: "Digite o email",
+                    },
                     domProps: { value: _vm.auth.email },
                     on: {
                       input: function ($event) {
@@ -39010,7 +39025,7 @@ var render = function () {
                       staticClass: "font-weight-bold",
                       attrs: { for: "password" },
                     },
-                    [_vm._v("Password")]
+                    [_vm._v("Senha:")]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -39027,6 +39042,7 @@ var render = function () {
                       type: "password",
                       name: "password",
                       id: "password",
+                      placeholder: "Digite a senha",
                     },
                     domProps: { value: _vm.auth.password },
                     on: {
@@ -39051,7 +39067,9 @@ var render = function () {
                     [
                       _vm._v(
                         "\n                                " +
-                          _vm._s(_vm.processing ? "Please wait" : "Login") +
+                          _vm._s(
+                            _vm.processing ? "Por favor, Aguarde..." : "Entrar"
+                          ) +
                           "\n                            "
                       ),
                     ]
@@ -39062,11 +39080,11 @@ var render = function () {
                   _c(
                     "label",
                     [
-                      _vm._v("Don't have an account? "),
+                      _vm._v("Não possui conta? "),
                       _c(
                         "router-link",
-                        { attrs: { to: { name: "register" } } },
-                        [_vm._v("Register Now!")]
+                        { attrs: { to: { name: "Register" } } },
+                        [_vm._v("Registre-se agora!")]
                       ),
                     ],
                     1
