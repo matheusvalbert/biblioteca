@@ -54,7 +54,7 @@
         },
         methods: {
             login() {
-                this.processing = true
+                this.processing = true;
                 this.axios.post('/api/login', this.auth)
                     .then(({data}) => {
                         Auth.login(data.access_token, data.user);

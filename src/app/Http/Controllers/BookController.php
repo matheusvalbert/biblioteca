@@ -6,6 +6,7 @@ use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\BookResourceCollection;
 use App\Models\Book;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -14,31 +15,22 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new BookResourceCollection(Book::all());
-    }
+        $books = Book::where('name', 'LIKE', "%{$request->filter}%")->paginate(3);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return new BookResourceCollection($books);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreBookRequest  $request
+     * @param  \App\Http\Requests\BookRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(BookRequest $request)
     {
         $book = Book::create($request->all());
-
         return BookResource::make($book);
     }
 
@@ -54,27 +46,15 @@ class BookController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Book $book)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateBookRequest  $request
+     * @param  \App\Http\Requests\BookRequest  $request
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
     public function update(BookRequest $request, Book $book)
     {
         $book->update($request->all());
-
         return BookResource::make($book);
     }
 
@@ -86,6 +66,9 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->users()->detach();
+        $book->comments()->delete();
+        $book->delete();
+        return ['deleted' => true];
     }
 }
