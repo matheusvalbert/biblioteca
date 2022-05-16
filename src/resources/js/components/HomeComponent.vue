@@ -23,7 +23,11 @@
                             <tbody>
                                 <tr v-for="(book, index) in books.data" :key="index">
                                     <td>{{ book.id }}</td>
-                                    <td><a href="#" @click.prevent="bookInfo(book.id)">{{ book.name }}</a></td>
+                                    <td>
+                                        <router-link :to="{ name: 'BookShow', params: { id: book.id } }">
+                                        {{ book.name }}
+                                        </router-link>
+                                    </td>
                                     <td>
                                         <a href="#" class="btn btn-info">Editar</a>
                                         <a href="#" class="btn btn-danger">Deletar</a>
@@ -51,7 +55,6 @@ import LoggedHeader from '../general/LoggedHeader.vue';
         data () {
             return {
                 user: this.auth.user,
-                logado: false,
                 books: {
                     data: []
                 }
@@ -62,10 +65,6 @@ import LoggedHeader from '../general/LoggedHeader.vue';
             this.getBooks();
         },
         methods: {
-
-            bookInfo (id) {
-                console.log(id);
-            },
 
             pushAddBook () {
                 this.$router.push({ name: 'BookCreate' });

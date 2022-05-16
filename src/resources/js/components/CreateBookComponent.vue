@@ -46,7 +46,6 @@ import LoggedHeader from '../general/LoggedHeader.vue';
         data () {
             return {
                 user: this.auth.user,
-                logado: false,
                 processing: false,
                 book: {
                     name: '',
@@ -79,15 +78,6 @@ import LoggedHeader from '../general/LoggedHeader.vue';
             updateHeaderTrue () {
                 this.$emit('updateLogadoFalse');
                 this.$emit('updateHeaderTrue');
-            },
-            data() {
-                this.axios.get('/api/testando')
-                    .then(({data}) => {
-                        console.log(data);
-                    })
-                    .catch((error) => {
-                        alert(error);
-                    })
             },
         }
     }
