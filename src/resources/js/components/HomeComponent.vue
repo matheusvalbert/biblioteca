@@ -9,8 +9,27 @@
                         <h3>Livros</h3>
                     </div>
                     <div class="card-body">
-                        <p class="mb-0">You are logged in as <b>{{user.email}}</b></p>
-                        <button class="btn btn-primary mt-2" @click="data">View user data</button>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#id</th>
+                                    <th>Nome</th>
+                                    <th width="200">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(book, index) in books.data" :key="index">
+                                    <td>{{ book.id }}</td>
+                                    <td>{{ book.name }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info">Editar</a>
+                                        <a href="#" class="btn btn-danger">Deletar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- <p class="mb-0">You are logged in as <b>{{user.email}}</b></p> -->
+                        <!-- <button class="btn btn-primary mt-2" @click="data">View user data</button> -->
                     </div>
                 </div>
             </div>
@@ -29,14 +48,32 @@ import LoggedHeader from '../general/LoggedHeader.vue';
         data () {
             return {
                 user: this.auth.user,
-                logado: false
+                logado: false,
+                books: {
+                    data: []
+                }
             }
         },
         created () {
             this.$emit('updateHeaderFalse');
+            this.getBooks();
         },
         methods: {
-            updateHeaderTrue() {
+
+            getBooks () {
+                this.axios.get('/api/books')
+                    .then(res => {
+                        console.log(res.data);
+                        this.books = res.data;
+                    })
+                    .catch(err => {
+                        alert(err);
+                    })
+            },
+
+            // ---------
+
+            updateHeaderTrue () {
                 this.$emit('updateLogadoFalse');
                 this.$emit('updateHeaderTrue');
             },
