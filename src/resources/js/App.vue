@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-dark vh-100">
+        <div class="">
             <router-view @updateHeaderFalse="navegacao=false" @updateHeaderTrue="navegacao=true" @updateLogadoFalse="logado=false"></router-view>
         </div>
     </div>

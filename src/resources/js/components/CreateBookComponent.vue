@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="pb-2">
     <logged-header :user="user" @updateHeaderTrue="updateHeaderTrue"></logged-header>
     <div class="container">
         <div class="row">

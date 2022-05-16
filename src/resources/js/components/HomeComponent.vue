@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="h-100 pb-2">
     <logged-header :user="user" @updateHeaderTrue="updateHeaderTrue"></logged-header>
     <div class="container">
         <div class="row">
@@ -23,7 +23,7 @@
                             <tbody>
                                 <tr v-for="(book, index) in books.data" :key="index">
                                     <td>{{ book.id }}</td>
-                                    <td>{{ book.name }}</td>
+                                    <td><a href="">{{ book.name }}</a></td>
                                     <td>
                                         <a href="#" class="btn btn-info">Editar</a>
                                         <a href="#" class="btn btn-danger">Deletar</a>
