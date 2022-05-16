@@ -23,7 +23,7 @@
                             <tbody>
                                 <tr v-for="(book, index) in books.data" :key="index">
                                     <td>{{ book.id }}</td>
-                                    <td><a href="">{{ book.name }}</a></td>
+                                    <td><a href="#" @click.prevent="bookInfo(book.id)">{{ book.name }}</a></td>
                                     <td>
                                         <a href="#" class="btn btn-info">Editar</a>
                                         <a href="#" class="btn btn-danger">Deletar</a>
@@ -63,6 +63,10 @@ import LoggedHeader from '../general/LoggedHeader.vue';
         },
         methods: {
 
+            bookInfo (id) {
+                console.log(id);
+            },
+
             pushAddBook () {
                 this.$router.push({ name: 'BookCreate' });
             },
@@ -70,7 +74,6 @@ import LoggedHeader from '../general/LoggedHeader.vue';
             getBooks () {
                 this.axios.get('/api/books')
                     .then(res => {
-                        console.log(res.data);
                         this.books = res.data;
                     })
                     .catch(err => {
