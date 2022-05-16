@@ -8,12 +8,12 @@
 
     <title>Biblioteca</title>
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <div id="app"></div>
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ mix('js/main.js') }}"></script>
 </body>
 
 </html>

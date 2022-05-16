@@ -6,7 +6,10 @@
             <div class="col-12">
                 <div class="card shadow-sm">
                     <div class="card-header">
-                        <h3>Livros</h3>
+                        <div class="d-flex justify-content-between">
+                            <h3>Livros</h3>
+                            <a href="#" class="btn btn-primary float-right">Adicionar Livro</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -28,8 +31,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <!-- <p class="mb-0">You are logged in as <b>{{user.email}}</b></p> -->
-                        <!-- <button class="btn btn-primary mt-2" @click="data">View user data</button> -->
+                        <p class="mb-0">You are logged in as <b>{{user.email}}</b></p>
+                        <button class="btn btn-primary mt-2" @click="data">View user data</button>
                     </div>
                 </div>
             </div>

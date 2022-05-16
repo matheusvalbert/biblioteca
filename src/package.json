@@ -12,6 +12,8 @@
     "devDependencies": {
         "@popperjs/core": "^2.10.2",
         "axios": "^0.25",
+        "browser-sync": "^2.27.9",
+        "browser-sync-webpack-plugin": "^2.3.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
@@ -25,6 +27,7 @@
     "dependencies": {
         "bootstrap": "^4.6.1",
         "bootstrap-vue": "^2.22.0",
+        "jquery": "^3.6.0",
         "vue-axios": "^3.4.1",
         "vue-router": "^3.5.3"
     }
