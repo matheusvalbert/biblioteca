@@ -17,13 +17,17 @@
                                 {{ book.name }}
                             </div>
                             <div class="col-12">
-                                <label for="descrição" class="font-weight-bold">Descrição:</label>
-                                {{ book.description }}
-                            </div>
-                            <div class="col-12">
                                 <label for="name" class="font-weight-bold">Número de páginas:</label>
                                 {{ book.pages }}
                             </div>
+                            <div class="col-12">
+                                <label for="descrição" class="font-weight-bold">Descrição:</label>
+                                {{ book.description }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <h4>Comentários:</h4>
                         </div>
                     </div>
                 </div>
