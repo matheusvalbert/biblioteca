@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBookRequest;
-use App\Http\Requests\UpdateBookRequest;
+use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\BookResourceCollection;
 use App\Models\Book;
@@ -36,7 +35,7 @@ class BookController extends Controller
      * @param  \App\Http\Requests\StoreBookRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBookRequest $request)
+    public function store(BookRequest $request)
     {
         $book = Book::create($request->all());
 
@@ -72,9 +71,11 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update(BookRequest $request, Book $book)
     {
-        //
+        $book->update($request->all());
+
+        return BookResource::make($book);
     }
 
     /**

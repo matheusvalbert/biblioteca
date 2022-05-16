@@ -29,7 +29,7 @@
                                         </router-link>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-info">Editar</a>
+                                        <router-link :to="{ name: 'BookEdit', params: { id: book.id } }" class="btn btn-info">Editar</router-link>
                                         <a href="#" class="btn btn-danger">Deletar</a>
                                     </td>
                                 </tr>

@@ -2,6 +2,7 @@ const MainPage = () => import('../pages/MainPage.vue');
 const Login = () => import('../components/LoginComponent.vue');
 const Register = () => import('../components/RegisterComponent.vue');
 const Home = () => import('../components/HomeComponent.vue');
+const EditBook = () => import('../components/EditBookComponent.vue');
 const CreateBook = () => import('../components/CreateBookComponent.vue');
 const ShowBook = () => import('../components/ShowBookComponent.vue');
 
@@ -38,6 +39,15 @@ const routes = [
         }
     },
     {
+        path: '/book/:id/edit',
+        component: EditBook,
+        name: "BookEdit",
+        props: true,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
         path: '/book/:id',
         component: ShowBook,
         name: "BookShow",
@@ -45,7 +55,7 @@ const routes = [
         meta: {
             requiresAuth: true,
         }
-    }
+    },
 ];
 
 export default routes;

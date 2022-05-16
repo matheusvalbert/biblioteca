@@ -1,7 +1,7 @@
 <template>
 <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-        <router-link :to="{ name: 'Home' }" class="navbar-brand">Biblioteca</router-link>
+        <router-link :to="{ name: 'Home' }" class="navbar-brand"><strong>Biblioteca</strong></router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         logout() {
-                this.axios.post('/api/logout')
+            this.axios.post('/api/logout')
                 .then(({data}) => {
                     Auth.logout();
                     this.$emit('updateHeaderTrue');

@@ -67,7 +67,6 @@ export default {
             this.axios.get(`/api/books/${this.id}`)
                 .then(({data}) => {
                     this.book = data.data;
-                    console.log(this.book);
                 })
                 .catch((error) => {
                     alert(error);

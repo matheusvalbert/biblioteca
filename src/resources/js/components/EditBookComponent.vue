@@ -12,8 +12,8 @@
                         <book-form
                             :processing="processing"
                             :book="book"
-                            :buttonText="'Adicionar Livro'"
-                            @form="addBook">
+                            :buttonText="'Atualizar Livro'"
+                            @form="updateBook">
                         </book-form>
                     </div>
                 </div>
@@ -28,6 +28,12 @@ import LoggedHeader from '../general/LoggedHeader.vue';
 import BookForm from '../general/BookForm.vue';
 
     export default {
+        props: {
+            id: {
+                required: true,
+                default: ''
+            }
+        },
         components: {
             LoggedHeader,
             BookForm
@@ -45,12 +51,23 @@ import BookForm from '../general/BookForm.vue';
         },
         created () {
             this.$emit('updateHeaderFalse');
+            this.getBook();
         },
         methods: {
 
-            addBook () {
+            getBook () {
+                this.axios.get(`/api/books/${this.id}`)
+                    .then(({data}) => {
+                        this.book = data.data;
+                    })
+                    .catch((error) => {
+                        alert(error);
+                    });
+            },
+
+            updateBook () {
                 this.processing = true
-                this.axios.post('/api/books/store', this.book)
+                this.axios.put(`/api/books/${this.book.id}`, this.book)
                     .then(({data}) => {
                         this.$router.push({ name: 'Home' });
                     })
