@@ -31,8 +31,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <p class="mb-0">You are logged in as <b>{{user.email}}</b></p>
-                        <button class="btn btn-primary mt-2" @click="data">View user data</button>
+                        <!-- <p class="mb-0">You are logged in as <b>{{user.email}}</b></p>
+                        <button class="btn btn-primary mt-2" @click="data">View user data</button> -->
                     </div>
                 </div>
             </div>
