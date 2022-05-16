@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <h3>Livros</h3>
-                            <a href="#" class="btn btn-primary float-right">Adicionar Livro</a>
+                            <a href="#" @click.prevent="pushAddBook" class="btn btn-primary float-right">Adicionar Livro</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -62,6 +62,10 @@ import LoggedHeader from '../general/LoggedHeader.vue';
             this.getBooks();
         },
         methods: {
+
+            pushAddBook () {
+                this.$router.push({ name: 'BookCreate' });
+            },
 
             getBooks () {
                 this.axios.get('/api/books')
