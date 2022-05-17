@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,13 @@ Route::middleware('auth:api')->group(function () {
         return $request->user();
     });
 
+    Route::put('/books/{book}', [BookController::class, 'update']);
+    Route::get('/books', [BookController::class, 'index']);
+    Route::post('/books/store', [BookController::class, 'store']);
+    Route::get('/books/{book}', [BookController::class, 'show']);
+    Route::delete('books/{book}', [BookController::class, 'destroy']);
+
+    Route::get('/comments/{book}', [CommentController::class, 'index']);
+    Route::post('/comments/store', [CommentController::class, 'store']);
 });
 
-Route::put('/books/{book}', [BookController::class, 'update']);
-Route::get('/books', [BookController::class, 'index']);
-Route::post('/books/store', [BookController::class, 'store']);
-Route::get('/books/{book}', [BookController::class, 'show']);
-Route::delete('books/{book}', [BookController::class, 'destroy']);

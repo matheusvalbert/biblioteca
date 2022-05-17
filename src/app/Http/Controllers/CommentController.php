@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Requests\CommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
+use App\Models\Book;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
@@ -13,9 +16,10 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Book $book)
     {
-        //
+        $comments = $book->comments()->latest()->paginate(3);
+        return CommentResource::collection($comments);
     }
 
     /**
@@ -31,12 +35,13 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCommentRequest  $request
+     * @param  \App\Http\Requests\CommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $user = User::find($request->user()->id);
+        $user->comments()->create($request->all());
     }
 
     /**
@@ -64,11 +69,11 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCommentRequest  $request
+     * @param  \App\Http\Requests\CommentRequest  $request
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(CommentRequest $request, Comment $comment)
     {
         //
     }

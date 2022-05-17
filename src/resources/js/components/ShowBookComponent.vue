@@ -25,10 +25,7 @@
                                 {{ book.description }}
                             </div>
                         </div>
-                        <hr>
-                        <div>
-                            <h4>Comentários:</h4>
-                        </div>
+                        <comments-component :id="book.id" v-if="book.id"></comments-component>
                     </div>
                 </div>
             </div>
@@ -39,6 +36,7 @@
 
 <script>
 import LoggedHeader from '../general/LoggedHeader.vue';
+import CommentsComponent from './CommentsComponent.vue';
 
 export default {
     props: {
@@ -49,7 +47,8 @@ export default {
     },
 
     components: {
-        LoggedHeader
+        LoggedHeader,
+        CommentsComponent
     },
     data () {
         return {

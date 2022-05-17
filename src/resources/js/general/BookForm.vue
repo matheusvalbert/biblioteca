@@ -6,7 +6,7 @@
     </div>
     <div class="form-group col-12">
         <label for="descricao" class="font-weight-bold">Descrição do livro:</label>
-        <textarea type="text" v-model="book.description" name="descricao" id="descricao" class="form-control" placeholder="Digite o nome"></textarea>
+        <textarea type="text" v-model="book.description" name="descricao" id="descricao" class="form-control" placeholder="Digite a descrição"></textarea>
     </div>
     <div class="form-group col-12">
         <label for="paginas" class="font-weight-bold">Número de páginas:</label>
