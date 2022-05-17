@@ -40,7 +40,7 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        $user = User::find($request->user()->id);
+        $user = $request->user();
         $user->comments()->create($request->all());
     }
 
