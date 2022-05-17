@@ -5,6 +5,8 @@ const Home = () => import('../components/HomeComponent.vue');
 const EditBook = () => import('../components/EditBookComponent.vue');
 const CreateBook = () => import('../components/CreateBookComponent.vue');
 const ShowBook = () => import('../components/ShowBookComponent.vue');
+const Lendo = () => import('../components/LendoComponent.vue');
+const Lidos = () => import('../components/LidosComponent.vue');
 
 const routes = [
     {
@@ -51,6 +53,24 @@ const routes = [
         path: '/book/:id',
         component: ShowBook,
         name: "BookShow",
+        props: true,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
+        path: '/lendo',
+        component: Lendo,
+        name: "Lendo",
+        props: true,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
+        path: '/lidos',
+        component: Lidos,
+        name: "Lidos",
         props: true,
         meta: {
             requiresAuth: true,

@@ -7,8 +7,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item" :class="{'active' : $route.name == 'Home'}">
                     <router-link :to="{ name: 'Home' }" class="nav-link">Livros</router-link>
+                </li>
+                <li class="nav-item" :class="{'active' : $route.name == 'Lendo'}">
+                    <router-link :to="{ name: 'Lendo' }" class="nav-link">Lendo</router-link>
+                </li>
+                <li class="nav-item" :class="{'active' : $route.name == 'Lidos'}">
+                    <router-link :to="{ name: 'Lidos' }" class="nav-link">Lidos</router-link>
                 </li>
             </ul>
             <div class="ml-auto">

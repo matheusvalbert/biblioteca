@@ -18,7 +18,6 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $books = Book::where('name', 'LIKE', "%{$request->filter}%")->latest()->paginate(3);
-
         return new BookResourceCollection($books);
     }
 

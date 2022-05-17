@@ -112,7 +112,6 @@ import PaginationComponent from '../general/PaginationComponent.vue';
                 this.axios.get(`/api/books?page=${this.books.meta.current_page ?? 1}&filter=${this.filter}`)
                     .then(res => {
                         this.books = res.data;
-                        console.log(this.books);
                     })
                     .catch(err => {
                         alert(err);
