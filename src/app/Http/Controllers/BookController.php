@@ -95,4 +95,11 @@ class BookController extends Controller
         $user = $request->user();
         return $user->books()->detach($request->id);
     }
+
+    public function index_pivot(Request $request)
+    {
+        $user = $request->user();
+        $books = $user->books()->where('name', 'LIKE', "%{$request->filter}%")->latest()->paginate(3);
+        return new BookResourceCollection($books);
+    }
 }

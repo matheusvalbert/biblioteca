@@ -18,7 +18,8 @@ class BookResourceCollection extends ResourceCollection
             'data' => $this->collection->transform(function($book) {
                 return [
                     'id' => $book->id,
-                    'name' => $book->name
+                    'name' => $book->name,
+                    'state' => $book->pivot->state ?? ''
                 ];
             }),
         ];

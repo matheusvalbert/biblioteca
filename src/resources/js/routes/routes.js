@@ -5,8 +5,7 @@ const Home = () => import('../components/HomeComponent.vue');
 const EditBook = () => import('../components/EditBookComponent.vue');
 const CreateBook = () => import('../components/CreateBookComponent.vue');
 const ShowBook = () => import('../components/ShowBookComponent.vue');
-const Lendo = () => import('../components/LendoComponent.vue');
-const Lidos = () => import('../components/LidosComponent.vue');
+const MeusLivros = () => import('../components/MeusLivrosCompoenent.vue');
 
 const routes = [
     {
@@ -59,18 +58,9 @@ const routes = [
         }
     },
     {
-        path: '/lendo',
-        component: Lendo,
-        name: "Lendo",
-        props: true,
-        meta: {
-            requiresAuth: true,
-        }
-    },
-    {
-        path: '/lidos',
-        component: Lidos,
-        name: "Lidos",
+        path: '/meus_livros',
+        component: MeusLivros,
+        name: "MeusLivros",
         props: true,
         meta: {
             requiresAuth: true,

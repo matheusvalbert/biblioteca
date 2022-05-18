@@ -38,6 +38,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('/book/state', [BookController::class, 'state']);
     Route::get('/book/state/{id}', [BookController::class, 'show_state']);
-    Route::delete('/book/state', [BookController::class, 'delete_state']);
+    Route::delete('/book/state/{id}', [BookController::class, 'delete_state']);
+    Route::get('/book/state', [BookController::class, 'index_pivot']);
 });
 
