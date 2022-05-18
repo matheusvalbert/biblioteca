@@ -8,6 +8,10 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <h3>Livro</h3>
+                            <div v-if="lerLidoState">
+                                <button v-if="lerLidoState!='lido'" :disabled="lerLidoState=='ler'" class="btn btn-primary" @click="lerLido('ler')">Ler</button>
+                                <button class="btn btn-primary" :disabled="lerLidoState=='lido'" @click="lerLido('lido')">Lido</button>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -53,12 +57,14 @@ export default {
     data () {
         return {
             user: this.auth.user,
-            book: {}
+            book: {},
+            lerLidoState: ''
         }
     },
     created () {
         this.$emit('updateHeaderFalse');
         this.getBook();
+        this.getLerLido();
     },
     methods: {
 
@@ -66,6 +72,41 @@ export default {
             this.axios.get(`/api/books/${this.id}`)
                 .then(({data}) => {
                     this.book = data.data;
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        },
+
+        lerLido (tipo) {
+            this.axios.post('/api/book/state', {
+                    id: this.id,
+                    state: tipo
+                })
+                .then(res => {
+                    this.getLerLido();
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        },
+
+        getLerLido () {
+            this.axios.get(`/api/book/state/${this.id}`)
+                .then(res => {
+                    this.lerLidoState = res.data;
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        },
+
+        getState () {
+            this.axios.delete(`/api/book/state`, {
+                id: this.id
+            })
+                .then(res => {
+                    console.log(res.data);
                 })
                 .catch((error) => {
                     alert(error);

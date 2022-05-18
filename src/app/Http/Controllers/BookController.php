@@ -70,4 +70,29 @@ class BookController extends Controller
         $book->delete();
         return ['deleted' => true];
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function state(Request $request)
+    {
+        $user = $request->user();
+        $user->books()->syncWithoutDetaching([
+            $request->id => ['state' => $request->state]
+        ]);
+    }
+
+    public function show_state (Request $request)
+    {
+        $user = $request->user();
+        return $user->books()->find($request->id)->pivot->state ?? 'nao';
+    }
+
+    public function delete_state(Request $request)
+    {
+        $user = $request->user();
+        return $user->books()->detach($request->id);
+    }
 }

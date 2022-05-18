@@ -25,6 +25,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('book_id')->constrained('books');
             $table->foreignId('user_id')->constrained('users');
+            $table->string('state')->default('nao'); // nao/lido/lendo/
             // $table->timestamps();
         });
     }

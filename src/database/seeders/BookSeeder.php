@@ -16,12 +16,8 @@ class BookSeeder extends Seeder
      */
     public function run()
     {
-
-        $user = User::all();
-
         Book::factory()
             ->count(5)
-            ->hasAttached($user)
             ->create();
     }
 }

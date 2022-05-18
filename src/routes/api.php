@@ -35,5 +35,9 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/comments/{book}', [CommentController::class, 'index']);
     Route::post('/comments/store', [CommentController::class, 'store']);
+
+    Route::post('/book/state', [BookController::class, 'state']);
+    Route::get('/book/state/{id}', [BookController::class, 'show_state']);
+    Route::delete('/book/state', [BookController::class, 'delete_state']);
 });
 
