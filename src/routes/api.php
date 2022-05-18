@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\StateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +42,10 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::group(['prefix' => '/book/state'], function () {
-        Route::post('/', [BookController::class, 'state']);
-        Route::get('/{id}', [BookController::class, 'show_state']);
-        Route::delete('/{id}', [BookController::class, 'delete_state']);
-        Route::get('/', [BookController::class, 'index_pivot']);
+        Route::post('/', [StateController::class, 'store']);
+        Route::get('/{id}', [StateController::class, 'show']);
+        Route::delete('/{id}', [StateController::class, 'destroy']);
+        Route::get('/', [StateController::class, 'index']);
     });
 });
 
