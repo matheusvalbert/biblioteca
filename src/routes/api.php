@@ -27,18 +27,24 @@ Route::middleware('auth:api')->group(function () {
         return $request->user();
     });
 
-    Route::put('/books/{book}', [BookController::class, 'update']);
-    Route::get('/books', [BookController::class, 'index']);
-    Route::post('/books/store', [BookController::class, 'store']);
-    Route::get('/books/{book}', [BookController::class, 'show']);
-    Route::delete('books/{book}', [BookController::class, 'destroy']);
+    Route::group(['prefix' => '/books'], function () {
+        Route::put('/{book}', [BookController::class, 'update']);
+        Route::get('/', [BookController::class, 'index']);
+        Route::post('/store', [BookController::class, 'store']);
+        Route::get('/{book}', [BookController::class, 'show']);
+        Route::delete('/{book}', [BookController::class, 'destroy']);
+    });
 
-    Route::get('/comments/{book}', [CommentController::class, 'index']);
-    Route::post('/comments/store', [CommentController::class, 'store']);
+    Route::group(['prefix' => '/comments'], function () {
+        Route::get('/{book}', [CommentController::class, 'index']);
+        Route::post('/store', [CommentController::class, 'store']);
+    });
 
-    Route::post('/book/state', [BookController::class, 'state']);
-    Route::get('/book/state/{id}', [BookController::class, 'show_state']);
-    Route::delete('/book/state/{id}', [BookController::class, 'delete_state']);
-    Route::get('/book/state', [BookController::class, 'index_pivot']);
+    Route::group(['prefix' => '/book/state'], function () {
+        Route::post('/', [BookController::class, 'state']);
+        Route::get('/{id}', [BookController::class, 'show_state']);
+        Route::delete('/{id}', [BookController::class, 'delete_state']);
+        Route::get('/', [BookController::class, 'index_pivot']);
+    });
 });
 

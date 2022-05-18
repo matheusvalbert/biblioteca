@@ -10,7 +10,7 @@
                 <li class="nav-item" :class="{'active' : $route.name == 'Home'}">
                     <router-link :to="{ name: 'Home' }" class="nav-link">Todos os Livros</router-link>
                 </li>
-                <li class="nav-item" :class="{'active' : $route.name == 'Lendo'}">
+                <li class="nav-item" :class="{'active' : $route.name == 'MeusLivros'}">
                     <router-link :to="{ name: 'MeusLivros' }" class="nav-link">Meus Livros</router-link>
                 </li>
             </ul>

@@ -84,18 +84,33 @@ class BookController extends Controller
         ]);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show_state (Request $request)
     {
         $user = $request->user();
         return $user->books()->find($request->id)->pivot->state ?? 'nao';
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function delete_state(Request $request)
     {
         $user = $request->user();
         return $user->books()->detach($request->id);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index_pivot(Request $request)
     {
         $user = $request->user();
