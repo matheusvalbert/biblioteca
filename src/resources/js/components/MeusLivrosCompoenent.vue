@@ -7,18 +7,14 @@
                 <div class="card shadow-sm">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
-                            <h3>Lendo</h3>
+                            <h3>Meus Livros</h3>
                         </div>
                     </div>
                         <div class="col pt-3">
                             <book-search-component @search="searchBook"></book-search-component>
                         </div>
                         <div class="card-body">
-                            <div class="alert alert-danger text-center" v-show="confirmDelete">
-                                <h2>Deseja realmente remover dos seus livros?</h2>
-                                <hr>
-                                <button class="btn btn-danger" @click.prevent="deleteBook">Remover</button>
-                            </div>
+                            <delete-component :confirmDelete="confirmDelete" :text="'Deseja realmente remover dos seus livros?'" :textButton="'Remover'" @apagar="deleteBook"></delete-component>
                             <table class="table">
                             <thead>
                                 <tr>
@@ -54,13 +50,14 @@
 import LoggedHeader from '../general/LoggedHeader.vue';
 import BookSearchComponent from '../general/BookSearchComponent.vue';
 import PaginationComponent from '../general/PaginationComponent.vue';
-
+import DeleteComponent from '../general/DeleteComponent.vue';
 
 export default {
     components: {
         LoggedHeader,
         BookSearchComponent,
-        PaginationComponent
+        PaginationComponent,
+        DeleteComponent
     },
     data() {
         return {

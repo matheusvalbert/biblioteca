@@ -7,7 +7,7 @@
                 <div class="card shadow-sm">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
-                            <h3>Livros</h3>
+                            <h3>Todos os Livros</h3>
                             <a href="#" @click.prevent="pushAddBook" class="btn btn-primary float-right">Adicionar Livro</a>
                         </div>
                     </div>
@@ -15,11 +15,7 @@
                         <book-search-component @search="searchBook"></book-search-component>
                     </div>
                     <div class="card-body">
-                        <div class="alert alert-danger text-center" v-show="confirmDelete">
-                            <h2>Deseja realmente deletar?</h2>
-                            <hr>
-                            <button class="btn btn-danger" @click.prevent="deleteBook">Deletar Agora</button>
-                        </div>
+                        <delete-component :confirmDelete="confirmDelete" :text="'Deseja realmente deletar?'" :textButton="'Deletar Agora'" @apagar="deleteBook"></delete-component>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -43,8 +39,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <!-- <p class="mb-0">You are logged in as <b>{{user.email}}</b></p>
-                        <button class="btn btn-primary mt-2" @click="data">View user data</button> -->
                         <div class="d-flex justify-content-center">
                             <pagination-component :pagination="books" @paginate="getBooks"></pagination-component>
                         </div>
@@ -60,12 +54,14 @@
 import LoggedHeader from '../general/LoggedHeader.vue';
 import BookSearchComponent from '../general/BookSearchComponent.vue';
 import PaginationComponent from '../general/PaginationComponent.vue';
+import DeleteComponent from '../general/DeleteComponent.vue';
 
     export default {
         components: {
             LoggedHeader,
             PaginationComponent,
-            BookSearchComponent
+            BookSearchComponent,
+            DeleteComponent
         },
         data () {
             return {
@@ -128,16 +124,7 @@ import PaginationComponent from '../general/PaginationComponent.vue';
             updateHeaderTrue () {
                 this.$emit('updateLogadoFalse');
                 this.$emit('updateHeaderTrue');
-            },
-            data() {
-                this.axios.get('/api/testando')
-                    .then(({data}) => {
-                        console.log(data);
-                    })
-                    .catch((error) => {
-                        alert(error);
-                    })
-            },
+            }
         }
     }
 </script>
