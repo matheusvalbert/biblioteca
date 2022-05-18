@@ -1,29 +1,24 @@
 <template>
 <div class="pb-2">
     <logged-header :user="user" @updateHeaderTrue="updateHeaderTrue"></logged-header>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="card shadow-sm">
-                    <div class="card-header">
-                        <h3>Adicionar novo Livro</h3>
-                    </div>
-                    <div class="container pt-2 mb-2">
-                        <book-form
-                            :processing="processing"
-                            :book="book"
-                            :buttonText="'Atualizar Livro'"
-                            @form="updateBook">
-                        </book-form>
-                    </div>
-                </div>
-            </div>
+    <layout-component>
+        <div class="card-header">
+            <h3>Adicionar novo Livro</h3>
         </div>
-    </div>
+        <div class="container pt-2 mb-2">
+            <book-form
+                :processing="processing"
+                :book="book"
+                :buttonText="'Atualizar Livro'"
+                @form="updateBook">
+            </book-form>
+        </div>
+    </layout-component>
 </div>
 </template>
 
 <script>
+import LayoutComponent from '../general/LayoutComponent.vue';
 import LoggedHeader from '../general/LoggedHeader.vue';
 import BookForm from '../general/BookForm.vue';
 
@@ -35,6 +30,7 @@ import BookForm from '../general/BookForm.vue';
             }
         },
         components: {
+            LayoutComponent,
             LoggedHeader,
             BookForm
         },
