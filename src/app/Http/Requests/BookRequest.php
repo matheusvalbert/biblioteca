@@ -26,7 +26,8 @@ class BookRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'description' => ['required', 'string', 'min:3', 'max:1000'],
-            'pages' => ['required', 'integer', 'min:1', 'max:10000']
+            'pages' => ['required', 'integer', 'min:1', 'max:10000'],
+            'image' => ['required', 'image', 'max:10240']
         ];
     }
 }

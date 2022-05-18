@@ -12,6 +12,10 @@
         <label for="paginas" class="font-weight-bold">Número de páginas:</label>
         <input type="number" v-model="book.pages" name="paginas" id="paginas" class="form-control" placeholder="Digite o número de páginas">
     </div>
+    <div class="form-group col-12">
+        <label for="image" class="font-weight-bold">Imagem:</label>
+        <input type="file" @change="handleOnchange" name="image" id="image" class="form-control">
+    </div>
     <div class="col-12 mb-2">
         <button type="submit" :disabled="processing" @click="onSubmit" class="btn btn-primary btn-block">
             {{ processing ? "Por favor, aguarde..." : buttonText }}
@@ -26,7 +30,8 @@ export default {
         book: {
             name: '',
             description: '',
-            pages: ''
+            pages: '',
+            image: '',
         },
         processing: {
             type: Boolean,
@@ -46,6 +51,11 @@ export default {
     created() {
     },
     methods: {
+
+        handleOnchange (e) {
+            this.book.image = e.target.files[0];
+        },
+
         onSubmit () {
             this.$emit('form');
         }

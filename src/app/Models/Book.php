@@ -13,6 +13,7 @@ class Book extends Model
         'name',
         'description',
         'pages',
+        'image'
     ];
 
     public function users()

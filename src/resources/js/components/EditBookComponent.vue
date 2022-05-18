@@ -41,7 +41,8 @@ import BookForm from '../general/BookForm.vue';
                 book: {
                     name: '',
                     description: '',
-                    pages: ''
+                    pages: '',
+                    image: ''
                 }
             }
         },
@@ -50,6 +51,15 @@ import BookForm from '../general/BookForm.vue';
             this.getBook();
         },
         methods: {
+
+            generateFormData () {
+                const formData = new FormData;
+                formData.set('image', this.book.image);
+                formData.set('name', this.book.name);
+                formData.set('description', this.book.description);
+                formData.set('pages', this.book.pages);
+                return formData;
+            },
 
             getBook () {
                 this.axios.get(`/api/books/${this.id}`)
@@ -63,7 +73,9 @@ import BookForm from '../general/BookForm.vue';
 
             updateBook () {
                 this.processing = true
-                this.axios.put(`/api/books/${this.book.id}`, this.book)
+                const formData = this.generateFormData();
+                formData.set('_method', 'PUT'); //set method for laravel
+                this.axios.post(`/api/books/${this.book.id}`, formData)
                     .then(({data}) => {
                         this.$router.push({ name: 'Home' });
                     })

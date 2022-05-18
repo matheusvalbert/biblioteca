@@ -29,6 +29,9 @@
                     <label for="descrição" class="font-weight-bold">Descrição:</label>
                     {{ book.description }}
                 </div>
+                <div class="col-12">
+                    <img v-if="book.image" :src="getImage()" class="img-fluid img-thumbnail">
+                </div>
             </div>
             <comments-component :id="book.id" v-if="book.id"></comments-component>
         </div>
@@ -67,6 +70,10 @@ export default {
         this.getLerLido();
     },
     methods: {
+
+        getImage () {
+            return "http://localhost:8080/storage/" + this.book.image;
+        },
 
         getBook () {
             this.axios.get(`/api/books/${this.id}`)

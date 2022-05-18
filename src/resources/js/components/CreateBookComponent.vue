@@ -35,7 +35,8 @@ import BookForm from '../general/BookForm.vue';
                 book: {
                     name: '',
                     description: '',
-                    pages: ''
+                    pages: '',
+                    image: ''
                 }
             }
         },
@@ -44,9 +45,19 @@ import BookForm from '../general/BookForm.vue';
         },
         methods: {
 
+            generateFormData () {
+                const formData = new FormData;
+                formData.set('image', this.book.image);
+                formData.set('name', this.book.name);
+                formData.set('description', this.book.description);
+                formData.set('pages', this.book.pages);
+                return formData;
+            },
+
             addBook () {
                 this.processing = true
-                this.axios.post('/api/books/store', this.book)
+                const formData = this.generateFormData();
+                this.axios.post('/api/books/store', formData)
                     .then(({data}) => {
                         this.$router.push({ name: 'Home' });
                     })

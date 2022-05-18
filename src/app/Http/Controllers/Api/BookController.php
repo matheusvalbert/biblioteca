@@ -8,6 +8,8 @@ use App\Http\Resources\BookResource;
 use App\Http\Resources\BookResourceCollection;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Ui\Presets\React;
 
 class BookController extends Controller
 {
@@ -30,7 +32,10 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
-        $book = Book::create($request->all());
+        $data = $request->all();
+        $data['image'] = $request->image->store('books');
+
+        $book = Book::create($data);
         return BookResource::make($book);
     }
 
@@ -54,7 +59,10 @@ class BookController extends Controller
      */
     public function update(BookRequest $request, Book $book)
     {
-        $book->update($request->all());
+        Storage::delete($book->image);
+        $data = $request->all();
+        $data['image'] = $request->image->store('books');
+        $book->update($data);
         return BookResource::make($book);
     }
 

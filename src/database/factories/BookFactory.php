@@ -19,7 +19,8 @@ class BookFactory extends Factory
         return [
             'name' => $this->faker->unique()->name(),
             'description' => $this->faker->text(),
-            'pages' => $this->faker->numberBetween($min = 1, $max = 9000)
+            'pages' => $this->faker->numberBetween($min = 1, $max = 9000),
+            'image' => '/bla'
         ];
     }
 }
