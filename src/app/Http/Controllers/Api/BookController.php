@@ -9,13 +9,13 @@ use App\Http\Resources\BookResourceCollection;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Ui\Presets\React;
 
 class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)

@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class AuthController extends Controller
 {
+    /**
+     * Register a new user.
+     *
+     * @param  \App\Http\Requests\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function register(Request $request)
     {
         $requestData = $request->all();
@@ -28,11 +33,17 @@ class AuthController extends Controller
 
         $requestData['password'] = Hash::make($requestData['password']);
 
-        $user = User::create($requestData);
+        User::create($requestData);
 
         return response([ 'status' => true, 'message' => 'User successfully register.' ], 200);
     }
 
+    /**
+     * Authenticate new login.
+     *
+     * @param  \App\Http\Requests\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function login(Request $request)
     {
         $requestData = $request->all();
@@ -56,6 +67,12 @@ class AuthController extends Controller
         return response(['user' => auth()->user(), 'access_token' => $accessToken], 200);
     }
 
+    /**
+     * Get logged user info.
+     *
+     * @param  \App\Http\Requests\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function me(Request $request)
     {
         $user = $request->user();
@@ -63,6 +80,12 @@ class AuthController extends Controller
         return response()->json(['user' => $user], 200);
     }
 
+    /**
+     * Loggout user.
+     *
+     * @param  \App\Http\Requests\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function logout (Request $request)
     {
         $token = $request->user()->token();
