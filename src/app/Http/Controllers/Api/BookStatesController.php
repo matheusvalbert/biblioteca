@@ -53,7 +53,7 @@ class BookStatesController extends Controller
     public function show(Request $request)
     {
         $user = $request->user();
-        return $user->books()->find($request->id)->pivot->state ?? 'nao';
+        return $user->books()->find($request->id)->pivot->state ?? 'none';
     }
 
     /**

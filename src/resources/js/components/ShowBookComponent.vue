@@ -30,6 +30,7 @@
                     {{ book.description }}
                 </div>
                 <div class="col-12">
+                    <label for="image" class="font-weight-bold">Imagem:</label>
                     <img v-if="book.image" :src="getImage()" class="img-fluid img-thumbnail">
                 </div>
             </div>
