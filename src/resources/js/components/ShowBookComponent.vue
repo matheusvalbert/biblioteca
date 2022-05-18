@@ -79,7 +79,7 @@ export default {
         },
 
         lerLido (tipo) {
-            this.axios.post('/api/book/state', {
+            this.axios.post('/api/books/state', {
                     id: this.id,
                     state: tipo
                 })
@@ -92,7 +92,7 @@ export default {
         },
 
         getLerLido () {
-            this.axios.get(`/api/book/state/${this.id}`)
+            this.axios.get(`/api/books/state/${this.id}`)
                 .then(res => {
                     this.lerLidoState = res.data;
                 })
@@ -102,7 +102,7 @@ export default {
         },
 
         getState () {
-            this.axios.delete(`/api/book/state`, {
+            this.axios.delete(`/api/books/state`, {
                 id: this.id
             })
                 .then(res => {

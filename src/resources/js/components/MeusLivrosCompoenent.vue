@@ -83,7 +83,7 @@ export default {
     methods: {
 
         deleteBook () {
-            this.axios.delete(`/api/book/state/${this.idToDelete}`)
+            this.axios.delete(`/api/books/state/${this.idToDelete}`)
                 .then(res => {
                     this.confirmDelete = false;
                     this.idToDelete = 0;
@@ -110,7 +110,7 @@ export default {
         },
 
         getBooks () {
-            this.axios.get(`/api/book/state?page=${this.books.meta.current_page ?? 1}&filter=${this.filter}`)
+            this.axios.get(`/api/books/state?page=${this.books.meta.current_page ?? 1}&filter=${this.filter}`)
                 .then(res => {
                     this.books = res.data;
                 })
@@ -120,7 +120,7 @@ export default {
         },
 
         lerLido (id, tipo) {
-            this.axios.post('/api/book/state', {
+            this.axios.post('/api/books/state', {
                     id: id,
                     state: tipo
                 })

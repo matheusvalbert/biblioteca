@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResourceCollection;
 use Illuminate\Http\Request;
 
-class StateController extends Controller
+class BookStatesController extends Controller
 {
     /**
      * Display a listing of the resource.
