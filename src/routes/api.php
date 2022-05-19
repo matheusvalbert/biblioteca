@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\BookStatesController;
+use App\Http\Requests\BookStatesRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,8 @@ use App\Http\Controllers\Api\BookStatesController;
 |
 */
 
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -30,23 +31,31 @@ Route::middleware('auth:api')->group(function () {
 
     Route::group(['prefix' => '/books'], function () {
 
-        Route::group(['prefix' => '/state'], function () {
-            Route::get('/', [BookStatesController::class, 'index']);
-            Route::post('/', [BookStatesController::class, 'store']);
-            Route::get('/{id}', [BookStatesController::class, 'show']);
-            Route::delete('/{id}', [BookStatesController::class, 'destroy']);
+        Route::group([
+            'prefix' => '/state',
+            'controller' => BookStatesController::class
+        ], function () {
+            Route::get('/', 'index');
+            Route::post('/', 'store');
+            Route::get('/{id}', 'show');
+            Route::delete('/{id}', 'destroy');
         });
 
-        Route::put('/{book}', [BookController::class, 'update']);
-        Route::get('/', [BookController::class, 'index']);
-        Route::post('/store', [BookController::class, 'store']);
-        Route::get('/{book}', [BookController::class, 'show']);
-        Route::delete('/{book}', [BookController::class, 'destroy']);
+        Route::controller(BookController::class)->group(function () {
+            Route::put('/{book}', 'update');
+            Route::get('/', 'index');
+            Route::post('/store', 'store');
+            Route::get('/{book}', 'show');
+            Route::delete('/{book}', 'destroy');
+        });
     });
 
-    Route::group(['prefix' => '/comments'], function () {
-        Route::get('/{book}', [CommentController::class, 'index']);
-        Route::post('/store', [CommentController::class, 'store']);
+    Route::group([
+        'prefix' => '/comments',
+        'controller' => CommentController::class
+    ], function () {
+        Route::get('/{book}', 'index');
+        Route::post('/store', 'store');
     });
 });
 

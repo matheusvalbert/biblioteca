@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Book;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +21,8 @@ class CommentFactory extends Factory
         return [
             'title' => $this->faker->name(),
             'comment' => $this->faker->text(),
+            'user_id' => User::factory(),
+            'book_id' => Book::factory()
         ];
     }
 }

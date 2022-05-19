@@ -17,17 +17,8 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::all();
-        $books = Book::all();
-
-        foreach ($users as $user) {
-            foreach ($books as $book) {
-                Comment::factory()
-                    ->count(3)
-                    ->for($user)
-                    ->for($book)
-                    ->create();
-            }
-        }
+        Comment::factory()
+            ->count(3)
+            ->create();
     }
 }
