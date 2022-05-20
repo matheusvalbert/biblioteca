@@ -44,6 +44,8 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - ./docker/mysql:/var/lib/mysql
+      - ./docker/mysql/log:/var/log/mysql
+      - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
     ports:
       - "3306:3306"
     networks:
