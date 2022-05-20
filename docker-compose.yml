@@ -27,6 +27,7 @@ services:
     volumes:
       - ./src:/var/www
       - ./.docker/nginx:/etc/nginx/conf.d
+      - ./docker/nginx/log:/var/log/nginx
     networks:
       - mynetwork
 
@@ -55,6 +56,9 @@ services:
   redis:
     container_name: laravel-redis
     image: redis:latest
+    volumes:
+      - ./.docker/redis/redis.conf:/etc/redis/redis.conf
+      - ./docker/redis/log:/var/log/redis/
     networks:
       - mynetwork
 
