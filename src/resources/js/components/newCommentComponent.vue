@@ -43,7 +43,7 @@ export default {
         onSubmit () {
             this.processing = true
             this.comment.book_id = this.book_id;
-            this.axios.post('/api/comments/store', this.comment)
+            this.axios.post('/api/comments', this.comment)
                 .then(res => {
                     this.$emit('updateComments');
                     this.comment = {};

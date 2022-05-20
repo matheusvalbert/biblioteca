@@ -57,7 +57,7 @@ import BookForm from '../general/BookForm.vue';
             addBook () {
                 this.processing = true
                 const formData = this.generateFormData();
-                this.axios.post('/api/books/store', formData)
+                this.axios.post('/api/books', formData)
                     .then(({data}) => {
                         this.$router.push({ name: 'Home' });
                     })
