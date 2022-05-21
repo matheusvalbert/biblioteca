@@ -79,6 +79,40 @@ services:
     networks:
       - mynetwork
 
+  elasticsearch:
+    container_name: es-laravel
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    networks:
+      - mynetwork
+    ports:
+      - 9200:9200
+  
+  kibana:
+    container_name: kb-laravel
+    image: docker.elastic.co/kibana/kibana:7.11.0
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    networks:
+      - mynetwork
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5601:5601
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.11.0
+    volumes:
+      - ./.docker/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - 5000:5000
+    depends_on:
+      - elasticsearch
+    networks:
+      - mynetwork
+
 networks:
   mynetwork:
     driver: bridge

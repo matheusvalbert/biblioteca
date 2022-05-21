@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\BookStatesController;
+use App\Models\Book;
 
 /*
 |--------------------------------------------------------------------------
