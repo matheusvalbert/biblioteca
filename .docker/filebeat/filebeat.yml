@@ -1,0 +1,40 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /var/nginx/log/access.log
+      input_type: log
+      document_type: nginx_access
+      scan_frequency: 10s
+    -
+      paths:
+        - /var/nginx/log/error.log
+      input_type: log
+      document_type: nginx_error
+      scan_frequency: 10s
+    -
+      paths:
+        - /var/mysql/log/mysql.log
+      input_type: log
+      document_type: mysql
+      scan_frequency: 10s
+    -
+      paths:
+        - /var/mysql/log/mysql_error.log
+      input_type: log
+      document_type: mysql_error
+      scan_frequency: 10s
+    -
+      paths:
+        - /var/mysql/log/mysql_slow.log
+      input_type: log
+      document_type: mysql_slow
+      scan_frequency: 10s
+output:
+  logstash:
+    hosts: ["logstash:5000"]
+logging:
+  files:
+    rotateeverybytes: 10485760 # = 10MB
+  selectors: ["*"]
+  level: warning

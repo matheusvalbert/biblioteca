@@ -103,6 +103,7 @@ services:
       - 5601:5601
 
   logstash:
+    container_name: ls-laravel
     image: docker.elastic.co/logstash/logstash:7.11.0
     volumes:
       - ./.docker/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
@@ -110,6 +111,18 @@ services:
       - 5000:5000
     depends_on:
       - elasticsearch
+    networks:
+      - mynetwork
+
+  filebeat:
+    container_name: fb-laravel
+    image: prima/filebeat
+    volumes:
+      - ./.docker/filebeat/filebeat.yml:/filebeat.yml
+      - ./docker/nginx/log:/var/nginx/log
+      - ./docker/mysql/log:/var/mysql/log
+    depends_on:
+      - logstash
     networks:
       - mynetwork
 
